@@ -1,6 +1,15 @@
 {
-  "name": "js-1apsup",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {}
+  "name": "augmented-reality",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vivekcse",
+    "augmented reality"
+  ],
+  "author": "",
+  "license": "ISC"
 }
