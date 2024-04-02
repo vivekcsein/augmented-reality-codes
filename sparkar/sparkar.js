@@ -10,9 +10,26 @@ const TG = require('TouchGestures');
 const FT = require('FaceTracking');
 const FG = require('FaceGestures');
 const INS = require('Instruction');
+const Audio = require('Audio');
 const CameraInfo = require('CameraInfo');
 const Reactive = require('Reactive');
 const NativeUI = require('NativeUI');
+
+//es module import
+import { root } from 'Scene';
+import d from 'Diagnostics';
+import { setInterval, clearInterval } from 'Time';
+import Animation from 'Animation';
+import { findFirst } from 'Materials';
+import { findFirst as _findFirst } from 'Textures';
+import { onTap } from 'TouchGestures';
+import { face as _face } from 'FaceTracking';
+import FG from 'FaceGestures';
+import { bind } from 'Instruction';
+import { getAudioPlaybackController } from 'Audio';
+import { captureDevicePosition } from 'CameraInfo';
+import Reactive from 'Reactive';
+import NativeUI from 'NativeUI';
 
 // face 
 const face = FT.face(0);
@@ -30,6 +47,7 @@ let gameON = false;
 let StartUION = false;
 let RepeatModeON = false;
 let blinkModeON = false;
+let mouthOpenON = false;
 
 // camera position hold
 // defualt is front facing
@@ -85,14 +103,19 @@ function camerapos() {
     //load 2d texturefrom scene assets
     const ItemTexture = await TS.findFirst("ItemTexture");
 
-    //Plane Appear/disapper on touch
+    //Plane Appear/disapper on tap
     let count = 1;
-    receiver.hidden = count;
     TG.onTap().subscribe(function (gesture) {
-        count--;
-        receiver.hidden = i;
-        if (count % 2 == 0) count = 2;
-        if (count % 2 == 1) count = 1;
+        count++;
+        if (count % 2 == 0) count = 0;
+        receiver.hidden = count;
+    });
+
+    // audio
+    Audio.getAudioPlaybackController('audio').then((playbackController) => {
+        playbackController.reset();
+        playbackController.setPlaying(true);
+        playbackController.setLooping(true);
     });
 
 })();

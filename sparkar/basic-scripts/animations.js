@@ -8,6 +8,12 @@ const π = Math.PI;
 //driver
 const driver = Animation.timeDriver({ durationMilliseconds: 1000, loopCount: 1, mirror: false });
 
+// Driver can be
+driver.start();
+driver.stop();
+driver.reset();
+driver.reverse();
+
 //Different types of Sampler in Animation
 const samplerLinear = Animation.samplers.linear(0, 2);
 const samplerRotate = Animation.samplers.linear(0, 2 * pi);
